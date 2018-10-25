@@ -1,0 +1,35 @@
+<div class="container mt-5">
+   <div id="content" style="clear:both;">
+    <div class="alert alert-warning" *ngIf="!plans || plans.length==0">
+      <fa name="exclamation-triangle"></fa> Records could not be found or loaded
+    </div>
+
+    <div class="row" *ngIf="plans && plans.length>0">
+      <div class="col-lg-2 ml-3 mt-2 mb-2 mr-3" *ngFor="let p of plans | sortby : sortbyv : isDesc">
+        <div class="card" (mouseover)="cf.hidden=false" (mouseleave)="cf.hidden=false" style="width: 200px;">
+          <!--<img class="card-img-center" [src]="s.branch=='ECE'?ecelogo:(s.branch=='CSE'?cselogo:(s.branch=='MECH'?mechlogo:(s.branch=='CIVIL'?civillogo:(s.branch=='IT'?itlogo:eeelogo))))"
+            height="100px" />
+          <div class="card-body" [ngStyle]="{'background-color' : s.gender === 'MALE' ? '#cceeff' : s.gender === 'FEMALE' ? '#ffe9f3' : '#f2f2f2' }">-->
+          <h4 class="card-title" style="text-align: center;">{{p.pTitle}}</h4>
+          <h5 class="ml-3">
+            <fa name="inr"></fa>{{p.charge}}
+          </h5>
+          <p class="card-text ml-2">
+            <br><strong>Speed : </strong> {{p.speed}} MBPS
+            <br><strong>FUP (Usage) :</strong> {{p.maxUsage}}GB per Month
+          </p>
+        </div>
+        <div class="card-footer" hidden="false" #cf>
+          <div class="btn-group">
+            <a routerLink="/applyPlan/{{p.pTitle}}" class="btn" title="Apply">
+              Apply
+            </a>
+            <a routerLink="/viewPlan/{{p.pTitle}}" class="btn" title="View">
+              View
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
